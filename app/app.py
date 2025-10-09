@@ -1,8 +1,15 @@
 import streamlit as st
 import pandas as pd
 import joblib 
+import os
 
-model = joblib.load("KNN_heart.pkl")
+MODEL_PATH = os.path.join("models", "credit_risk_model.pkl")
+if os.path.exists(MODEL_PATH):
+    model = joblib.load(MODEL_PATH)
+else:
+    st.error("Model file not found! Please train the model first.")
+    st.stop()
+
 scaler = joblib.load("scaler.pkl")
 expected_columns = joblib.load("columns.pkl")
 
