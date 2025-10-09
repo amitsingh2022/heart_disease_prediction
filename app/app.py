@@ -3,7 +3,7 @@ import pandas as pd
 import joblib 
 import os
 
-MODEL_PATH = os.path.join("models", "credit_risk_model.pkl")
+MODEL_PATH = os.path.join("models", "KNN_heart.pkl")
 if os.path.exists(MODEL_PATH):
     model = joblib.load(MODEL_PATH)
 else:
