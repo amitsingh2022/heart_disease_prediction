@@ -1,23 +1,16 @@
-import numpy as np
-import pandas as pd
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
 
-df = pd.read_csv("../data/raw/heart.csv")
+def preprocess_data():
 
-ch_mean = df.loc[df['Cholesterol'] != 0, 'Cholesterol'].mean()
+    numeric_features = ['Age', 'RestingBP', 'Cholesterol', 'FastingBS', 'MaxHR', 'Oldpeak', 'Sex_M', 'ChestPainType_ATA', 'ChestPainType_NAP',
+       'ChestPainType_TA', 'RestingECG_Normal', 'RestingECG_ST',
+       'ExerciseAngina_Y', 'ST_Slope_Flat', 'ST_Slope_Up']
 
-df['Cholesterol'] = df['Cholesterol'].replace(0,ch_mean)
-df['Cholesterol'] = df['Cholesterol'].round(2)
-
-resting_bp_mean = df.loc[df['RestingBP'] != 0, 'RestingBP'].mean()
-df['RestingBP'] = df['RestingBP'].replace(0,resting_bp_mean)
-df['RestingBP'] = df['RestingBP'].round(2)
-
-df_encode = pd.get_dummies(df, drop_first= True)
-
-df_encode = df_encode.astype(int)
-
-from sklearn.preprocessing import StandardScaler
-numerical_cols = ['Age', 'RestingBP', 'Cholesterol', 'MaxHR', 'Oldpeak']
-scaler = StandardScaler()
-df_encode[numerical_cols]=scaler.fit_transform(df_encode[numerical_cols])
+    preprocessor = ColumnTransformer(
+            transformers=[
+            ('num', StandardScaler(), numeric_features)
+            ],
+            remainder='drop')
+    return preprocessor
