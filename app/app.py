@@ -6,7 +6,7 @@ import os
 # ------------------------
 # Load trained model
 # ------------------------
-MODEL_PATH = os.path.join("../models/heart_disease_model.pkl")
+MODEL_PATH = os.path.join("models", "heart_disease_model.pkl")
 if os.path.exists(MODEL_PATH):
     model = joblib.load(MODEL_PATH)
 else:
