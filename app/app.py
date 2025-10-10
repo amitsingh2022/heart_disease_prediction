@@ -6,14 +6,14 @@ import os
 # ------------------------
 # Load trained model
 # ------------------------
-MODEL_PATH = os.path.join("models", "heart_disease_model.pkl")
+MODEL_PATH = os.path.join("../models/heart_disease_model.pkl")
 if os.path.exists(MODEL_PATH):
     model = joblib.load(MODEL_PATH)
 else:
     st.error("Model file not found! Please train the model first.")
     st.stop()
 
-st.title("❤️ Heart Disease Prediction App")
+st.title("Heart Disease Prediction App🫀")
 st.markdown("Provide the following details to predict your risk of heart disease.")
 
 # ------------------------
